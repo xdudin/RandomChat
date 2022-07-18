@@ -1,3 +1,3 @@
-# Headline
+# Quick start
 
-> An awesome project.
+code sample here
