@@ -44,15 +44,14 @@ outgoing message
   "name": "Bob",
   "languageCode": "ru",
   "userAttributes": {
-    "age": "male",
-    "gender": null
+    "gender": "male",
+    "age": null
   },
   "targetAttributes": {
-    "age": "female",
-    "gender": null
+    "gender": "female",
+    "age": null
   }
 }
-
 ```
 
 incoming message
