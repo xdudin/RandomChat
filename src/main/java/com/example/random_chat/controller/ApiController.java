@@ -12,6 +12,11 @@ public class ApiController {
 
     private final CategoryService categoryService;
 
+    @GetMapping("/")
+    public String testConnection() {
+        return "Connection successful";
+    }
+
     @GetMapping("/categories")
     public Categories getCategories() {
         return categoryService.getCategories();
