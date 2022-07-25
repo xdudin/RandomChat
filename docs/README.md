@@ -1,3 +1,1 @@
-# Quick start
-
-code sample here
+# mvp prototype of random chat server
