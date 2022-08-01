@@ -1,4 +1,4 @@
-package com.example.random_chat.dao;
+package com.example.random_chat.entity;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -7,10 +7,10 @@ import org.springframework.data.relational.core.mapping.Table;
 
 @Data
 @AllArgsConstructor
-@Table(name = "gender")
-public class GenderTypeDao {
+@Table(name = "age_group")
+public class AgeTypeEntity {
 
     @Id
     Short id;
-    String gender;
+    String age;
 }

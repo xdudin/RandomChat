@@ -1,14 +1,12 @@
 package com.example.random_chat.model;
 
-import com.example.random_chat.dao.AgeTypeDao;
-import com.example.random_chat.dao.GenderTypeDao;
-import com.example.random_chat.dao.LanguageTypeDao;
-import lombok.Value;
+import com.example.random_chat.entity.AgeTypeEntity;
+import com.example.random_chat.entity.ChatTypeEntity;
+import com.example.random_chat.entity.GenderTypeEntity;
+import com.example.random_chat.entity.LanguageTypeEntity;
 
-@Value
-public class Categories {
 
-    Iterable<LanguageTypeDao> language;
-    Iterable<GenderTypeDao> gender;
-    Iterable<AgeTypeDao> age;
-}
+public record Categories(Iterable<LanguageTypeEntity> language,
+                         Iterable<GenderTypeEntity> gender,
+                         Iterable<AgeTypeEntity> age,
+                         Iterable<ChatTypeEntity> chatType) {}

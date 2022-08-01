@@ -1,7 +1,7 @@
 package com.example.random_chat.service;
 
 
-import com.example.random_chat.dao.MessageDao;
+import com.example.random_chat.entity.MessageEntity;
 import com.example.random_chat.model.InputMessage;
 import com.example.random_chat.repository.MessageRepository;
 import lombok.RequiredArgsConstructor;
@@ -17,12 +17,12 @@ public class MessageService {
     private final MessageRepository messageRepository;
 
     public void save(InputMessage message) {
-        MessageDao messageDao = new MessageDao();
-        messageDao.setDialogUUID(UUID.fromString(message.getChatUUID()));
-        messageDao.setUserUUID(UUID.fromString(message.getSenderUUID()));
-        messageDao.setCreatedAt(new Timestamp(System.currentTimeMillis()));
-        messageDao.setContent(message.getContent());
+        MessageEntity messageEntity = new MessageEntity();
+        messageEntity.setDialogUUID(UUID.fromString(message.getChatUUID()));
+        messageEntity.setUserUUID(UUID.fromString(message.getSenderUUID()));
+        messageEntity.setCreatedAt(new Timestamp(System.currentTimeMillis()));
+        messageEntity.setContent(message.getContent());
 
-        messageRepository.save(messageDao);
+        messageRepository.save(messageEntity);
     }
 }

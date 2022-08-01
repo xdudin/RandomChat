@@ -1,8 +1,7 @@
 package com.example.random_chat.repository;
 
-import com.example.random_chat.dao.GenderTypeDao;
+import com.example.random_chat.entity.GenderTypeEntity;
 import org.assertj.core.api.Assertions;
-import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.data.jdbc.DataJdbcTest;
 import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase;
@@ -26,10 +25,10 @@ class GenderTypeRepositoryTest {
                 .containsExactlyInAnyOrderElementsOf(getGenderTypeDaos());
     }
 
-    private Iterable<GenderTypeDao> getGenderTypeDaos() {
+    private Iterable<GenderTypeEntity> getGenderTypeDaos() {
         return List.of(
-                new GenderTypeDao((short) 1, "male"),
-                new GenderTypeDao((short) 2, "female")
+                new GenderTypeEntity((short) 1, "male"),
+                new GenderTypeEntity((short) 2, "female")
         );
     }
 }

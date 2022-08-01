@@ -1,10 +1,11 @@
 package com.example.random_chat.service;
 
-import com.example.random_chat.dao.AgeTypeDao;
-import com.example.random_chat.dao.GenderTypeDao;
-import com.example.random_chat.dao.LanguageTypeDao;
+import com.example.random_chat.entity.AgeTypeEntity;
+import com.example.random_chat.entity.GenderTypeEntity;
+import com.example.random_chat.entity.LanguageTypeEntity;
 import com.example.random_chat.model.Categories;
 import com.example.random_chat.repository.AgeTypeRepository;
+import com.example.random_chat.repository.ChatTypeRepository;
 import com.example.random_chat.repository.GenderTypeRepository;
 import com.example.random_chat.repository.LanguageTypeRepository;
 import org.springframework.stereotype.Service;
@@ -16,11 +17,13 @@ public class CategoryService {
 
     public CategoryService(LanguageTypeRepository languageTypeRepository,
                            GenderTypeRepository genderTypeRepository,
-                           AgeTypeRepository ageTypeRepository) {
+                           AgeTypeRepository ageTypeRepository,
+                           ChatTypeRepository chatTypeRepository) {
         categories = new Categories(
                 languageTypeRepository.findAll(),
                 genderTypeRepository.findAll(),
-                ageTypeRepository.findAll()
+                ageTypeRepository.findAll(),
+                chatTypeRepository.findAll()
         );
     }
 
@@ -32,9 +35,9 @@ public class CategoryService {
         if (languageCode == null) {
             return null;
         }
-        for (LanguageTypeDao languageTypeDao : categories.getLanguage()) {
-            if (languageTypeDao.getCode().equals(languageCode)) {
-                return languageTypeDao.getId();
+        for (LanguageTypeEntity languageTypeEntity : categories.language()) {
+            if (languageTypeEntity.getCode().equals(languageCode)) {
+                return languageTypeEntity.getId();
             }
         }
         throw new RuntimeException("no such category: " + languageCode);
@@ -44,9 +47,9 @@ public class CategoryService {
         if (gender == null) {
             return null;
         }
-        for (GenderTypeDao genderTypeDao: categories.getGender()) {
-            if (genderTypeDao.getGender().equals(gender)) {
-                return genderTypeDao.getId();
+        for (GenderTypeEntity genderTypeEntity : categories.gender()) {
+            if (genderTypeEntity.getGender().equals(gender)) {
+                return genderTypeEntity.getId();
             }
         }
         throw new RuntimeException("no such category: " + gender);
@@ -56,9 +59,9 @@ public class CategoryService {
         if (age == null) {
             return null;
         }
-        for (AgeTypeDao ageTypeDao: categories.getAge()) {
-            if (ageTypeDao.getAge().equals(age)) {
-                return ageTypeDao.getId();
+        for (AgeTypeEntity ageTypeEntity : categories.age()) {
+            if (ageTypeEntity.getAge().equals(age)) {
+                return ageTypeEntity.getId();
             }
         }
         throw new RuntimeException("no such category: " + age);

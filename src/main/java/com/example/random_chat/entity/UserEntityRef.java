@@ -1,4 +1,4 @@
-package com.example.random_chat.dao;
+package com.example.random_chat.entity;
 
 
 import lombok.AllArgsConstructor;
@@ -11,7 +11,7 @@ import java.util.UUID;
 @Data
 @AllArgsConstructor
 @Table("dialog_participant")
-public class UserDaoRef {
+public class UserEntityRef {
 
     @Column("user_uuid")
     private UUID userUUID;

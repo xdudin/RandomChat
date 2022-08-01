@@ -1,4 +1,4 @@
-package com.example.random_chat.dao;
+package com.example.random_chat.entity;
 
 
 import lombok.Data;
@@ -11,7 +11,7 @@ import java.util.UUID;
 
 @Data
 @Table("message")
-public class MessageDao {
+public class MessageEntity {
 
     @Id
     private Long id;

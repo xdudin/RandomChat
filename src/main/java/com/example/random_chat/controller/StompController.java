@@ -1,6 +1,6 @@
 package com.example.random_chat.controller;
 
-import com.example.random_chat.dao.UserDao;
+import com.example.random_chat.entity.UserEntity;
 import com.example.random_chat.model.Chat;
 import com.example.random_chat.model.Dialog;
 import com.example.random_chat.model.InputMessage;
@@ -45,10 +45,10 @@ public class StompController {
             User user2 = pair.get().getSecond();
             Chat dialog = new Dialog(user1, user2);
             System.out.println("DialogId: " + dialog.getUUID());
-            UserDao userDao1 = userService.save(user1);
-            UserDao userDao2 = userService.save(user2);
+            UserEntity userEntity1 = userService.save(user1);
+            UserEntity userEntity2 = userService.save(user2);
             chatPool.addChat(dialog);
-            chatService.save(dialog, List.of(userDao1, userDao2));
+            chatService.save(dialog, List.of(userEntity1, userEntity2));
             for (User dialogUser : dialog.getUsers()) {
                 var responseMessage = new ResponseMessage(dialog.getUUID(), dialogUser.getUserUUID().toString(), 10, null, null);
                 template.convertAndSendToUser(dialogUser.getSessionId(), "/dialog", responseMessage, createHeaders(dialogUser.getSessionId()));

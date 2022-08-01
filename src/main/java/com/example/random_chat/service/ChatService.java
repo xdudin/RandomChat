@@ -1,7 +1,7 @@
 package com.example.random_chat.service;
 
-import com.example.random_chat.dao.ChatDao;
-import com.example.random_chat.dao.UserDao;
+import com.example.random_chat.entity.ChatEntity;
+import com.example.random_chat.entity.UserEntity;
 import com.example.random_chat.model.Chat;
 import com.example.random_chat.repository.ChatRepository;
 import lombok.RequiredArgsConstructor;
@@ -16,12 +16,12 @@ public class ChatService {
 
     private final ChatRepository chatRepository;
 
-    public void save(Chat chat, Collection<UserDao> users) {
-        ChatDao chatDao = new ChatDao();
-        chatDao.setUuid(UUID.fromString(chat.getUUID()));
-        chatDao.setTypeId((short) 1);
-        chatDao.addAllParticipants(users);
+    public void save(Chat chat, Collection<UserEntity> users) {
+        ChatEntity chatEntity = new ChatEntity();
+        chatEntity.setUuid(UUID.fromString(chat.getUUID()));
+        chatEntity.setTypeId((short) 1);
+        chatEntity.addAllParticipants(users);
 
-        chatRepository.save(chatDao);
+        chatRepository.save(chatEntity);
     }
 }

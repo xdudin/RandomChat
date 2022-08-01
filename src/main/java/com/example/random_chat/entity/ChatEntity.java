@@ -1,4 +1,4 @@
-package com.example.random_chat.dao;
+package com.example.random_chat.entity;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.Data;
@@ -16,7 +16,7 @@ import java.util.UUID;
 @Data
 @Table(name = "dialog")
 @JsonIgnoreProperties({"id", "new"})
-public class ChatDao implements Persistable<UUID> {
+public class ChatEntity implements Persistable<UUID> {
 
     @Id
     private UUID uuid;
@@ -25,14 +25,14 @@ public class ChatDao implements Persistable<UUID> {
     private Short typeId;
 
     @MappedCollection(idColumn = "dialog_uuid")
-    private Set<UserDaoRef> users = new HashSet<>();
+    private Set<UserEntityRef> users = new HashSet<>();
 
-    public void addParticipant(UserDao user) {
-        users.add(new UserDaoRef(user.getUuid()));
+    public void addParticipant(UserEntity user) {
+        users.add(new UserEntityRef(user.getUuid()));
     }
 
-    public void addAllParticipants(Collection<UserDao> users) {
-        users.forEach(userDao -> this.users.add(new UserDaoRef(userDao.getUuid())));
+    public void addAllParticipants(Collection<UserEntity> users) {
+        users.forEach(userDao -> this.users.add(new UserEntityRef(userDao.getUuid())));
     }
 
     @Override

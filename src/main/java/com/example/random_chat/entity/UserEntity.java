@@ -1,4 +1,4 @@
-package com.example.random_chat.dao;
+package com.example.random_chat.entity;
 
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
@@ -13,7 +13,7 @@ import java.util.UUID;
 @Data
 @Table(name = "user")
 @JsonIgnoreProperties({"id", "new"})
-public class UserDao implements Persistable<UUID> {
+public class UserEntity implements Persistable<UUID> {
 
     @Id
     private UUID uuid;

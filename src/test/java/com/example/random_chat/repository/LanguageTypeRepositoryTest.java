@@ -1,8 +1,7 @@
 package com.example.random_chat.repository;
 
-import com.example.random_chat.dao.LanguageTypeDao;
+import com.example.random_chat.entity.LanguageTypeEntity;
 import org.assertj.core.api.Assertions;
-import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.data.jdbc.DataJdbcTest;
 import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase;
@@ -26,14 +25,14 @@ class LanguageTypeRepositoryTest {
                 .containsExactlyInAnyOrderElementsOf(getLanguageTypeDaos());
     }
 
-    private Iterable<LanguageTypeDao> getLanguageTypeDaos() {
+    private Iterable<LanguageTypeEntity> getLanguageTypeDaos() {
         return List.of(
-                new LanguageTypeDao((short) 1, "English", "en"),
-                new LanguageTypeDao((short) 20, "Czech", "cs"),
-                new LanguageTypeDao((short) 23, "German", "de"),
-                new LanguageTypeDao((short) 34, "French", "fr"),
-                new LanguageTypeDao((short) 51, "Italian", "it"),
-                new LanguageTypeDao((short) 94, "Russian", "ru")
+                new LanguageTypeEntity((short) 1, "English", "en"),
+                new LanguageTypeEntity((short) 20, "Czech", "cs"),
+                new LanguageTypeEntity((short) 23, "German", "de"),
+                new LanguageTypeEntity((short) 34, "French", "fr"),
+                new LanguageTypeEntity((short) 51, "Italian", "it"),
+                new LanguageTypeEntity((short) 94, "Russian", "ru")
         );
     }
 }
