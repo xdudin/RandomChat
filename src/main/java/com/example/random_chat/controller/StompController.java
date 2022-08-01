@@ -12,6 +12,8 @@ import com.example.random_chat.service.MessageService;
 import com.example.random_chat.model.UserPool;
 import com.example.random_chat.service.UserService;
 import lombok.RequiredArgsConstructor;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.data.util.Pair;
 import org.springframework.messaging.MessageHeaders;
 import org.springframework.messaging.handler.annotation.Header;
@@ -27,6 +29,8 @@ import java.util.Optional;
 @Controller
 @RequiredArgsConstructor
 public class StompController {
+
+    private final Logger log = LoggerFactory.getLogger(StompController.class);
 
     private final UserPool userPool;
     private final ChatPool chatPool;
@@ -44,11 +48,13 @@ public class StompController {
             User user1 = pair.get().getFirst();
             User user2 = pair.get().getSecond();
             Chat dialog = new Dialog(user1, user2);
-            System.out.println("DialogId: " + dialog.getUUID());
             UserEntity userEntity1 = userService.save(user1);
             UserEntity userEntity2 = userService.save(user2);
+            log.info("User created: {}", user1.getUserUUID());
+            log.info("User created: {}", user2.getUserUUID());
             chatPool.addChat(dialog);
             chatService.save(dialog, List.of(userEntity1, userEntity2));
+            log.info("Dialog created: {}", dialog.getUUID());
             for (User dialogUser : dialog.getUsers()) {
                 var responseMessage = new ResponseMessage(dialog.getUUID(), dialogUser.getUserUUID().toString(), 10, null, null);
                 template.convertAndSendToUser(dialogUser.getSessionId(), "/dialog", responseMessage, createHeaders(dialogUser.getSessionId()));
@@ -73,6 +79,7 @@ public class StompController {
             template.convertAndSendToUser(user.getSessionId(), "/dialog", responseMessage, createHeaders(user.getSessionId()));
         }
         chatPool.remove(chatUUID);
+        log.info("Dialog closed: {}", chatUUID);
     }
 
     private MessageHeaders createHeaders(String sessionId) {
