@@ -1,6 +1,6 @@
 version: '3'
 
-# called with env-file option
+# DB_ROOT_PASSWORD and DB_USER_PASSWORD must be set
 # docker compose -f compose_mysql_local.yaml --env-file ./secrets/db_passwords.env up -p
 
 services:
