@@ -33,3 +33,4 @@ build/
 .vscode/
 
 /secrets
+compose_mysql_local.yaml
