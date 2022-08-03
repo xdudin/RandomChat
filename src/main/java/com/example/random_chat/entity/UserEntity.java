@@ -1,38 +1,28 @@
 package com.example.random_chat.entity;
 
 
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 import org.springframework.data.annotation.Id;
-import org.springframework.data.domain.Persistable;
 import org.springframework.data.relational.core.mapping.Column;
 import org.springframework.data.relational.core.mapping.Table;
 
-import java.util.UUID;
-
 @Data
+@AllArgsConstructor
+@NoArgsConstructor
 @Table(name = "user")
-@JsonIgnoreProperties({"id", "new"})
-public class UserEntity implements Persistable<UUID> {
+public class UserEntity {
 
     @Id
-    private UUID uuid;
+    private Long id;
 
     private String name;
-    @Column("age_id")
-    private Short ageId;
-    @Column("gender_id")
-    private Short genderId;
     @Column("language_id")
     private Short languageId;
-
-    @Override
-    public UUID getId() {
-        return uuid;
-    }
-
-    @Override
-    public boolean isNew() {
-        return true;
-    }
+    @Column("gender_id")
+    private Short genderId;
+    @Column("age_id")
+    private Short ageId;
+    private String password;
 }
