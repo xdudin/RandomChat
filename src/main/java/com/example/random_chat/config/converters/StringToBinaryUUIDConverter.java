@@ -1,4 +1,4 @@
-package com.example.random_chat.config;
+package com.example.random_chat.config.converters;
 
 import org.springframework.core.convert.converter.Converter;
 import org.springframework.data.convert.WritingConverter;
