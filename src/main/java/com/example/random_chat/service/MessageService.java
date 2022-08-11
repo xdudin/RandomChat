@@ -8,7 +8,6 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.sql.Timestamp;
-import java.util.UUID;
 
 @Service
 @RequiredArgsConstructor
@@ -18,10 +17,10 @@ public class MessageService {
 
     public void save(InputMessage message) {
         MessageEntity messageEntity = new MessageEntity();
-        messageEntity.setDialogUUID(UUID.fromString(message.getChatUUID()));
-        messageEntity.setUserUUID(UUID.fromString(message.getSenderUUID()));
+        messageEntity.setChatId(message.chatId());
+        messageEntity.setUserId(message.senderId());
         messageEntity.setCreatedAt(new Timestamp(System.currentTimeMillis()));
-        messageEntity.setContent(message.getContent());
+        messageEntity.setContent(message.content());
 
         messageRepository.save(messageEntity);
     }

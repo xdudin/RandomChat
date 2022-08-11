@@ -27,11 +27,11 @@ public class ChatEntity {
     @MappedCollection(idColumn = "chat_id")
     private Set<UserEntityRef> users = new HashSet<>();
 
-    public void addParticipant(UserEntity user) {
-        users.add(new UserEntityRef(user.getId()));
+    public void addParticipantById(Long userId) {
+        users.add(new UserEntityRef(userId));
     }
 
-    public void addAllParticipants(Collection<UserEntity> users) {
-        users.forEach(userEntity -> this.users.add(new UserEntityRef(userEntity.getId())));
+    public void addAllParticipantsByIds(Collection<Long> usersIds) {
+        usersIds.forEach(id -> this.users.add(new UserEntityRef(id)));
     }
 }

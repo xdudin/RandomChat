@@ -1,26 +1,24 @@
 package com.example.random_chat.model;
 
-import lombok.Value;
-
+import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Collections;
 import java.util.List;
-import java.util.UUID;
 
-@Value
-public class Dialog implements Chat {
 
-    String uuid = UUID.randomUUID().toString();
+public class Dialog extends Chat {
 
-    User user1;
-    User user2;
+    private final List<User> users;
 
-    @Override
-    public Collection<User> getUsers() {
-        return List.of(user1, user2);
+    public Dialog(List<User> users) {
+        if (users.size() != 2) {
+            throw new IllegalArgumentException("dialog may contain only 2 users");
+        }
+        this.users = new ArrayList<>(users);
     }
 
     @Override
-    public String getUUID() {
-        return uuid;
+    public Collection<User> getUsers() {
+        return Collections.unmodifiableList(users);
     }
 }

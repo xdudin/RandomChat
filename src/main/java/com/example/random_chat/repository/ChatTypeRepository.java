@@ -7,6 +7,6 @@ import org.springframework.data.repository.CrudRepository;
 public interface ChatTypeRepository extends CrudRepository<ChatTypeEntity, Short> {
 
     @Override
-    @Query("select * from messenger_db.dialog_type order by id")
+    @Query("select * from messenger_db.chat_type order by id")
     Iterable<ChatTypeEntity> findAll();
 }

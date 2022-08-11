@@ -24,5 +24,5 @@ public class UserEntity {
     private Short genderId;
     @Column("age_id")
     private Short ageId;
-    private String password;
+    private byte[] password;
 }

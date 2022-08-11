@@ -5,8 +5,8 @@ import lombok.Value;
 @Value
 public class ResponseMessage {
 
-    String chatUUID;
-    String senderUUID;
+    Long chatId;
+    Long senderId;
     Integer eventCode;
     String serviceContent;
 

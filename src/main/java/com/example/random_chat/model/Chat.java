@@ -1,10 +1,20 @@
 package com.example.random_chat.model;
 
+import lombok.Data;
+
 import java.util.Collection;
+import java.util.stream.Collectors;
 
-public interface Chat {
+@Data
+public abstract class Chat {
 
-    Collection<User> getUsers();
+    private Long id;
 
-    String getUUID();
+    public abstract Collection<User> getUsers();
+
+    public Collection<Long> getUserIds() {
+        return getUsers().stream()
+                .map(User::getUserId)
+                .collect(Collectors.toList());
+    }
 }

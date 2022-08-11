@@ -4,9 +4,8 @@ import com.example.random_chat.entity.UserEntity;
 import com.example.random_chat.model.User;
 import com.example.random_chat.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
-
-import java.util.UUID;
 
 @Service
 @RequiredArgsConstructor
@@ -15,15 +14,19 @@ public class UserService {
     private final UserRepository userRepository;
     private final CategoryService categoryService;
 
-    public UserEntity save(User user) {
+    public void saveNew(User user, String password) {
         UserEntity userEntity = new UserEntity();
-        userEntity.setUuid(UUID.fromString(user.getUserUUID().toString()));
+
         userEntity.setName(user.getName());
         userEntity.setLanguageId(categoryService.getLanguageId(user.getLanguageCode()));
         userEntity.setGenderId(categoryService.getGenderId(user.getUserAttributes().getGender()));
         userEntity.setAgeId(categoryService.getAgeId(user.getUserAttributes().getAge()));
 
+        BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
+        userEntity.setPassword(encoder.encode(password).getBytes());
+
         userRepository.save(userEntity);
-        return userEntity;
+        user.setUserId(userEntity.getId());
+        user.setUserId(userEntity.getId());
     }
 }

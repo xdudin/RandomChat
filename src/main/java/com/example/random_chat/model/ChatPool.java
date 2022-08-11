@@ -10,18 +10,18 @@ import java.util.Map;
 @Service
 public class ChatPool {
 
-    private final Map<String, Chat> chats = new HashMap<>();
+    private final Map<Long, Chat> chats = new HashMap<>();
 
     public void addChat(Chat chat) {
-        chats.put(chat.getUUID(), chat);
+        chats.put(chat.getId(), chat);
     }
 
-    public Chat getByUUID(String uuid) {
-        return chats.get(uuid);
+    public Chat getById(Long id) {
+        return chats.get(id);
     }
 
-    public void remove(String uuid) {
-        chats.remove(uuid);
+    public void remove(Long id) {
+        chats.remove(id);
     }
 
     public int size() {
